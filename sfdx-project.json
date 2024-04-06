@@ -1,0 +1,18 @@
+{
+  "packageDirectories": [
+    {
+      "path": "force-app/main/default",
+      "default": true,
+      "package": "dreamhouse1",
+      "versionName": "Spring '24",
+      "versionNumber": "1.0.0.NEXT"
+    }
+  ],
+  "namespace": "",
+  "sfdcLoginUrl": "https://login.salesforce.com",
+  "sourceApiVersion": "60.0",
+  "packageAliases": {
+    "dreamhouse1": "0HoF9000000blNBKAY",
+    "dreamhouse1@1.0.0-1": "04tF9000000YJ9aIAG"
+  }
+}
