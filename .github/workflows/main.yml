@@ -21,6 +21,7 @@ jobs:
             - sfdx force:auth:jwt:grant --clientid $SF_CONSUMER_KEY_PROD --jwtkeyfile /opt/atlassian/pipelines/agent/build/server.key --username $SF_USERNAME_PROD --setdefaultdevhubusername --setalias DevHub
             - sfdx force:org:list --all
             - sf org list
+            - sfdx auth:list
             - sfdx force:org:display --targetusername $SF_USERNAME_PROD
             - sfdx force:package:list
             - sf package version create list
@@ -28,9 +29,9 @@ jobs:
             #- sfdx force:org:create --targetdevhubusername DevHub --setdefaultusername --definitionfile /opt/atlassian/pipelines/agent/build/config/project-scratch-def.json --setalias MyScratchOrg --wait 10 --durationdays 7
             - sfdx force:org:display --targetusername $SF_USERNAME_PROD
             - sf package version create --package dreamhouse1 --installation-key test1234 --wait 10 --codecoverage --targetdevhubusername DevHub
-			      - sfdx force:package:list
             - sf package version create list
-			      - sfdx auth:list
+            - sfdx force:package:list
+            - sfdx auth:list
             - sf package install --wait 10 --publish-wait 10 --package dreamhouse1@1.0.0-1 --installation-key test1234 --no-prompt --target-org MyScratchOrg
             - sfdx force:apex:test:run --targetusername $SF_USERNAME_PROD --wait 10 --resultformat tap --codecoverage --testlevel $TESTLEVEL
             - sf package version promote --no-prompt --package dreamhouse1@1.0.0-1 --target-dev-hub DevHub
