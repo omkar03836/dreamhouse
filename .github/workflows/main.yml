@@ -3,23 +3,22 @@ on: [push]
 jobs:
     SFDX-CLI-Deploy:
         runs-on: ubuntu-latest
-        step:
-          script:
-            - apt update && apt -y install jq
+        steps:
+        - apt update && apt -y install jq
             # Install Salesforce CLI
-            - wget https://developer.salesforce.com/media/salesforce-cli/sf/channels/stable/sf-linux-x64.tar.xz
-            - mkdir -p ~/cli/sf
-            - tar xJf sf-linux-x64.tar.xz -C ~/cli/sf --strip-components 1
-            - export PATH=~/cli/sf/bin:$PATH
+        - wget https://developer.salesforce.com/media/salesforce-cli/sf/channels/stable/sf-linux-x64.tar.xz
+        - mkdir -p ~/cli/sf
+        - tar xJf sf-linux-x64.tar.xz -C ~/cli/sf --strip-components 1
+        - export PATH=~/cli/sf/bin:$PATH
             # Output CLI version and plug-in information
-            - sfdx --version
-            - sfdx plugins --core
+        - sfdx --version
+        - sfdx plugins --core
             
             # Authenticate to the Dev Hub using the server key
-            - ls -lrt /opt/atlassian/pipelines/agent/build
-            - pwd
-            - sfdx force:auth:jwt:grant --clientid $SF_CONSUMER_KEY_PROD --jwtkeyfile /opt/atlassian/pipelines/agent/build/server.key --username $SF_USERNAME_PROD --setdefaultdevhubusername --setalias DevHub
-            - sfdx force:org:list --all
+        - ls -lrt /opt/atlassian/pipelines/agent/build
+        - pwd
+        - sfdx force:auth:jwt:grant --clientid $SF_CONSUMER_KEY_PROD --jwtkeyfile /opt/atlassian/pipelines/agent/build/server.key --username $SF_USERNAME_PROD --setdefaultdevhubusername --setalias DevHub
+        - sfdx force:org:list --all
             - sf org list
             - sfdx auth:list
             - sfdx force:org:display --targetusername $SF_USERNAME_PROD
